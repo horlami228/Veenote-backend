@@ -1,0 +1,51 @@
+
+/api/v1/note/create:
+  post:
+    summary: Create a new note
+    description: Registers a new note in the system
+    tags:
+      - Note
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fileName:
+                type: string
+              userId:
+                type: string
+              folderId:
+                type: string
+              content:
+                type: string
+            example:
+              fileName: "Mr John speech"
+              content: API which stands for application programming interface
+    responses:
+      200:
+        description: Note was created Successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                fileName:
+                  type: string
+                content:
+                  type: string
+                userId:
+                  type: string
+                folderId:
+                  type: string
+                createdAt:
+                  type: string
+                updatedAt:
+                  type: string
+      400:
+        description: file name already exist
+      500:
+        description: Internal server error

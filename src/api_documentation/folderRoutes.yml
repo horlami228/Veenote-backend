@@ -1,0 +1,77 @@
+
+/api/v1/folder/create:
+  post:
+    summary: Create a new folder
+    description: Registers a new folder in the system
+    tags:
+      - Folder
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              folderName:
+                type: string
+            example:
+              folderName: "School Work"
+    responses:
+      200:
+        description: Folder was created Successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                folderName:
+                  type: string
+                createdAt:
+                  type: string
+                updatedAt:
+                  type: string
+      400:
+        description: Folder name already exist
+      500:
+        description: Internal server error
+
+
+/api/v1/folder/rootfolder:
+  get:
+    summary: Get the root folder
+    parameters:
+      - name: user_id
+        in: query
+        required: true
+        description: User id of the root folder to retrieve
+        schema:
+          type: string
+    tags:
+      - Folder
+    responses:
+      200:
+        description: Successful user returned
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  folderName:
+                    type: string
+                  id:
+                    type: string
+                  isRoot: bool
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+
+      404:
+        description: Root Folder does not exist for this user
+      500:
+        description: Internal server error
+

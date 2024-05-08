@@ -1,0 +1,65 @@
+
+/api/v1/login:
+  post:
+    tags:
+      - Login
+    summary: User login
+    description: Endpoint to authenticate a user and generate an access token
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - name: userName or email
+        in: body
+        description: User's username or email
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: body
+        description: User's password
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: Successful login
+        schema:
+          type: object
+          properties:
+            access_token:
+              type: string
+            token_type:
+              type: string
+            expires_in:
+              type: integer
+      401:
+        description: Unauthorized
+      500:
+        description: Internal server error
+
+/api/v1/logout:
+  post:
+    tags:
+      - Logout
+    summary: User logout
+    description: Endpoint to logout a user and invalidate the access token
+    consumes:
+      - application/json
+    produces:
+      - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: Successful logout
+      401:
+        description: Unauthorized
+      500:
+        description: Internal server error
